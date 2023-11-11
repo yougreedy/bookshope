@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<!-- Root Context: defines shared resources visible to all other web components -->
+     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mariadb://127.0.0.1:3306/mariadb90"></property>
+		<property name="username" value="mariadb90"></property>
+		<property name="password" value="1234"></property>
+	</bean>	
+	
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"> -->
+<!-- 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
+<!-- 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
+<!-- 		<property name="username" value="exbook"></property> -->
+<!-- 		<property name="password" value="1234"></property>	 -->
+<!-- 	</bean> -->
+    	
+    <!-- sqlSessionFactory는 MyBatis 프레임워크에 데이터베이스와의 상호작용을 관리하는 역활을 하는 인터페이스 
+      SqlSessionFactory는 데이터베이스와의 연결을 설정하고, SQL 쿼리를 실행할 수 있는 SqlSession 객체를 생성하는 역활
+    -->		
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>	
+    <!-- name="configLocation": MyBatis 설정 파일의 위치를 지정, MyBatis는 SQL 매퍼 파일과 설정 파일을 사용하여 데이터베이스 연동을 구성
+     classpath:mybatis-config.xml는 클래스패스에서 mybatis-config.xml 파일을 찾아서 사용한다는 의미 -->
+	</bean>
+	<bean id="sqlSqssionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+    <!-- <constructor-arg>는 Spring Framework의 XML 설정 파일에서 빈(Bean)을 생성할 때 생성자(Constructor)를 통해 전달할 인자(Argument)를 설정하는 태그 -->		
+	</bean>
+	<!-- SqlSessionTemplate는 MyBatis의 SqlSession을 감싸고, Spring의 트랜잭션 관리와 연동하여 편리한 데이터베이스 작업을 가능 
+	  MyBatis의 SQL 세션을 직접 관리하는 대신 SqlSessionTemplate를 사용하여 데이터베이스 작업을 수행할 수 있으며, Spring의 트랜잭션 관리도 함께 이루어집니다
+	-->
+      			
+</beans>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="customer">
+
+     <resultMap type="Customer" id="CustomerMap">
+        <id column="CUSTID" property="custid"/>
+        <result column="PASSWD" property="passwd"/>
+        <result column="NAME" property="name"/>
+        <result column="ADDRESS" property="address"/>
+        <result column="PHONE" property="phone"/>
+     </resultMap>
+
+     <sql id="search">
+        SELECT * FROM customer 
+        
+        <where>
+           <if test="search == 1">
+               custid=#{keyword}
+           </if>
+           
+           <if test="search == 2">
+               name LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+           </if>
+           
+           <if test="search == 3">
+                address LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+           </if>
+           
+           <if test="search == 4">
+                phone LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+           </if>
+        </where>
+     </sql>
+     
+     <select id="total" resultType="Integer">
+         SELECT COUNT(*) FROM (<include refid="search"></include>)sub
+     </select>
+     
+     <select id="list" resultMap="CustomerMap">
+         SELECT * FROM (<include refid="search"></include>)sub
+         LIMIT #{offset}, #{perPage}
+     </select>
+     
+     <select id="item" resultMap="CustomerMap">
+       SELECT * FROM customer 
+       WHERE custid = #{custid}
+     </select>
+
+     <insert id="add">
+        INSERT INTO customer
+        VALUES(#{custid}, #{passwd}, #{name}, #{address}, #{phone}) 
+     </insert>
+     
+      <update id="update">
+        UPDATE customer
+        SET passwd = #{passwd}, name = #{name}, address = #{address}, phone = #{phone}
+        WHERE custid = #{custid}
+    </update>
+     
+     <delete id="delete">
+      DELETE FROM customer
+      WHERE custid = #{custid}
+     </delete>
+     
+     
+     
+     
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
