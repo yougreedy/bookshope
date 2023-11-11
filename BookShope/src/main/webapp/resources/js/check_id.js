@@ -1,3 +1,5 @@
+let checkId = false;//어디서나 사용이 가능함 checkId 전역변수 선언
+
 window.addEventListener("load", () => {
  
     const button = document.getElementById("check_id");
@@ -20,8 +22,13 @@ window.addEventListener("load", () => {
                                      // 이 코드에서는 xhr.DONE (상태 4)을 사용하여 요청이 완료   
         if(xhr.status == 200){//xhr.status는 서버로부터 받은 HTTP 응답 상태 코드를 나타내는 속성입니다. 일반적으로 200은 "OK"를 의미하며, 성공적인 응답
              
-               alert(xhr.responseText);
-           }
+               if(xhr.responseText === "OK"){//이 부분은 XMLHttpRequest 객체가 받은 응답을 확인합니다. 받은 응답이 "OK"인지 확인하여 조건을 결정합니다.
+                  checkId = true;
+                  alert("사용이 가능한 아이디 입니다.")
+                }else {
+                    alert("다른 사용자가 이미 사용한 아이디 입니다.")
+                }
+            }       
        }
     };
 
@@ -45,6 +52,12 @@ window.addEventListener("load", () => {
 
         xhr.send();//send 메서드를 호출하여 실제 요청을 서버로 보냅니다. 
    //이 메서드를 호출함으로써 브라우저는 서버에 GET 요청을 보내고, 서버는 해당 요청에 대한 응답을 반환 
-        alert(xhr.responseText);
+   
+            if(xhr.responseText === "OK"){//이 부분은 XMLHttpRequest 객체가 받은 응답을 확인합니다. 받은 응답이 "OK"인지 확인하여 조건을 결정합니다.
+                checkId = true;
+                alert("사용이 가능한 아이디 입니다.")
+            }else {
+                alert("다른 사용자가 이미 사용한 아이디 입니다.")
+            }
     });
 });
