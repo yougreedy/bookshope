@@ -46,4 +46,11 @@ public class CustomerDaoImpl implements CustomerDao {
        sql.delete("customer.delete", custid);
 	}
 
+	@Override
+	public Customer login(Customer item) throws Exception {
+		return sql.selectOne("customer.login",item);
+	}
+
+	
+
 }

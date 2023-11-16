@@ -17,5 +17,7 @@ public interface CustomerService {
 
 	void delete(String custid)throws Exception;
 
+	Boolean login(Customer item)throws Exception;
+
 
 }

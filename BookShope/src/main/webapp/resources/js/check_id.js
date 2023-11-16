@@ -3,7 +3,11 @@ let checkId = false;//어디서나 사용이 가능함 checkId 전역변수 선�
 window.addEventListener("load", () => {
  
     const button = document.getElementById("check_id");
-    const button_sysnc = document.getElementById("check_id_sync");
+    const button_sync = document.getElementById("check_id_sync");
+
+    document.querySelector("input[name='custid']").addEventListener("change", e =>{
+        checkId = false;
+   });
 
    //[비동기중복확인]
    button.addEventListener("click", () => {
@@ -39,7 +43,7 @@ window.addEventListener("load", () => {
 
 
     //[동기중복확인]
-    button_sysnc.addEventListener("click", () => {
+    button_sync .addEventListener("click", () => {
 
         const id = document.querySelector("input[name = 'custid']").value;
 

@@ -13,7 +13,11 @@
           <h1>마당서점</h1>
       </div>
       <div>
+         <a href="login">로그인</a>
          <a href="signup">회원가입</a>
+      </div>
+      <div>
+         <a href="logout">로그아웃</a>
       </div>
       <div>
          <ul>

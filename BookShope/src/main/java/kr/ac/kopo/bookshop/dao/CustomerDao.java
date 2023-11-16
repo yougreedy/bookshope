@@ -19,4 +19,10 @@ public interface CustomerDao {
 
 	void delete(String custid)throws Exception;
 
+	Customer login(Customer item)throws Exception;
+
+	
+
+	
+
 }

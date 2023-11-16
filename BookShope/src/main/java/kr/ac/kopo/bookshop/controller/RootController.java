@@ -22,6 +22,21 @@ public class RootController {
 		return "index";
 	}
 	
+	
+	@GetMapping("/login")
+	public String login()throws Exception{
+		
+		return "login";
+	}
+	
+	@PostMapping("/login")
+	public String login(Customer item)throws Exception{
+	     Boolean result = customerService.login(item);
+	
+	     
+	     return "redirect:/";
+	}
+	
 	@GetMapping("/signup")
 	public String signup()throws Exception{
 		
@@ -36,7 +51,7 @@ public class RootController {
 		return "redirect:."; 
 	}
 
-	@ResponseBody//리던되는 값을 view 리졸브에게 줘서 리즐조가 ok.jsp, fail.jsp 찾지 못하게 하는것 그대로 클라이언트에게 보내라
+	@ResponseBody//리턴되는 값을 view 리졸브에게 줘서 리즐조가 ok.jsp, fail.jsp 찾지 못하게 하는것 그대로 클라이언트에게 보내라
 	@GetMapping("/checkId/{custid}")
 	public String checkId(@PathVariable String custid, Customer item)throws Exception{
 		

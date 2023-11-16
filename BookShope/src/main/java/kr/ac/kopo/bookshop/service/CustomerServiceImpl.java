@@ -42,6 +42,18 @@ public class CustomerServiceImpl implements CustomerService {
         dao.delete(custid);		
 	}
 
+	@Override
+	public Boolean login(Customer item) throws Exception {
+		Customer result = dao.login(item);
+		
+		if(result != null) {
+            			
+			return true;
+		}
+		
+		return false;
+	}
+
 
 
 
