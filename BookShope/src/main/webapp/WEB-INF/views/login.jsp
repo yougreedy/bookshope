@@ -27,7 +27,7 @@
 				</div>
 				
 				<div>
-					<button type="button">로그인</button>
+					<button>로그인</button>
 					<a href="/"><button type="button">처음으로</button></a>
 				</div>
 			</div>

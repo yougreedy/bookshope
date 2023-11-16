@@ -23,6 +23,20 @@
 	
 	<context:component-scan base-package="kr.ac.kopo" />
 	
-	
+<interceptors>
+   <interceptor>
+       <mapping path="/book/**"/> <!-- <mapping>: 해당 인터셉터가 적용될 경로를 지정 -->
+       <mapping path="/customer/**"/>
+       
+       <exclude-mapping path="/book/list"/>  <!-- 로그인 없이 페이지 갈 수 있음 -->
+       <exclude-mapping path="/book/add_cart/**"/><!-- <exclude-mapping>: 특정 경로를 제외하고 적용하도록 지정 -->
+       
+          <beans:bean class="kr.ac.kopo.bookshop.inerceptor.AdminInerceptor"></beans:bean>	
+     <!--AdminInerceptor 클래스를 빈으로 등록하여 사용
+      이 클래스는 HandlerInterceptor 인터페이스를 구현한 것으로, preHandle, postHandle,
+       afterCompletion 메서드를 오버라이드하여 특정 조건에 따라 동작 
+       예를 들어, 로그인 여부를 체크하거나 특정 권한이 있는지 확인하는 등의 작업  -->            
+   </interceptor>
+</interceptors>
 	
 </beans:beans>
