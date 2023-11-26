@@ -42,6 +42,7 @@
          <ul>
             <li><a href="book/list">도서관리</a></li>
             <li><a href="customer/list">고객관리</a></li>
+            <li><a href="order/list">주문관리</a></li>
          </ul>
       </div>
    </div>

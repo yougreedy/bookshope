@@ -26,7 +26,7 @@ public class RootController {
 	 CustomerService service;
 	
 	@GetMapping("/")
-	public String index(HttpSession session, Model model, Customer item)throws Exception {
+	public String index(HttpSession session, Model model)throws Exception {
 	  
 	  String msg = (String) session.getAttribute("msg");
 		
@@ -60,19 +60,19 @@ public class RootController {
 		  
 	     Boolean result = customerService.login(item);
 	     //customerService의 login 메서드를 호출하여 로그인 시도를 합니다. 이 메서드는 아마도 사용자 정보를 기반으로 로그인을 처리하고, 로그인 성공 여부를 반환
-	     
 
 	     if(result) {
-	      //result가 true이면 로그인이 성공한 경우이고, false이면 로그인이 실패
-	      session.setAttribute("msg", "로그인 되었다 짜샤!.");//세션에 "환영합니다."라는 메시지를 저장합니다. 이 메시지는 로그인 후 사용자에게 표시	 
-	   
-	      session.setAttribute("member", item);	 
-	     }//: 로그인이 성공하면 세션에 사용자 정보(result)를 저장 일반적으로 로그인 후 사용자 정보를 세션에 저장하여 다른 페이지에서도 이 정보를 활용
-	     
+	        //result가 true이면 로그인이 성공한 경우이고, false이면 로그인이 실패
+		    session.setAttribute("member", item);
+		    //: 로그인이 성공하면 세션에 사용자 정보(result)를 저장 일반적으로 로그인 후 사용자 정보를 세션에 저장하여 다른 페이지에서도 이 정보를 활용
+		    // 로그인이 성공하면 세션에 사용자 정보(item)를 저장합니다. 
+	        // 로그인 후 다른 페이지에서 이 정보를 활용할 수 있습니다.
+	        session.setAttribute("msg", "로그인 되었다 짜샤!.");//세션에 "환영합니다."라는 메시지를 저장합니다. 이 메시지는 로그인 후 사용자에게 표시	 
+	      
+	     }
 	     else {
 	    	 session.setAttribute("msg", "아이디 비번 까먹음??.");//로그인이 실패한 경우 세션에 실패 메시지를 저장
 	     }
-	
 	     
 	     return "redirect:/";
 	}

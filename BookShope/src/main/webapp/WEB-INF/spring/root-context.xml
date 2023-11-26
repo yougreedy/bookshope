@@ -27,6 +27,12 @@
     <!-- name="configLocation": MyBatis 설정 파일의 위치를 지정, MyBatis는 SQL 매퍼 파일과 설정 파일을 사용하여 데이터베이스 연동을 구성
      classpath:mybatis-config.xml는 클래스패스에서 mybatis-config.xml 파일을 찾아서 사용한다는 의미 -->
 	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
 	<bean id="sqlSqssionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
     <!-- <constructor-arg>는 Spring Framework의 XML 설정 파일에서 빈(Bean)을 생성할 때 생성자(Constructor)를 통해 전달할 인자(Argument)를 설정하는 태그 -->		
